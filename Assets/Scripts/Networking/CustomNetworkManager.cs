@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using UnityEngine.UI;
+using kcp2k;
 
+[RequireComponent(typeof(KcpTransport))]
 public class CustomNetworkManager : NetworkManager
 {
     public static CustomNetworkManager instance;
