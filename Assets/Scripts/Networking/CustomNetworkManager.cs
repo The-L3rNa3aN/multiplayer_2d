@@ -6,16 +6,25 @@ using UnityEngine.UI;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public InputField ipAddress;
-    private NetworkManager networkManager;
+    public static CustomNetworkManager instance;
 
-    public override void Start()
+    public override void Awake()
     {
-        networkManager= GetComponent<NetworkManager>();
+        if (instance != null && instance != this)
+            Destroy(this);
+        else
+            instance = this;
     }
-    public void ConnectToClient()
+
+    public void ConnectToClient(string ip)
     {
-        networkManager.networkAddress = ipAddress.text;
-        networkManager.StartClient();
+        networkAddress = ip;
+        StartClient();
+    }
+
+    public void ConnectToServer(string ip)
+    {
+        networkAddress = ip;
+        StartServer();
     }
 }
