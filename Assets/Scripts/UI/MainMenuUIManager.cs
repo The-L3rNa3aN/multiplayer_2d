@@ -24,6 +24,7 @@ public class MainMenuUIManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         joinServerPanel.SetActive(true);
         ipAddressField.gameObject.SetActive(true);
+        nameField.gameObject.SetActive(true);
     }
     
     public void MainMenu_CreateServer()
@@ -31,17 +32,20 @@ public class MainMenuUIManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         createServerPanel.SetActive(true);
         ipAddressField.gameObject.SetActive(true);
+        nameField.gameObject.SetActive(true);
     }
 
     public void Join()
     {
         string ip = ipAddressField.text;
+        string name = nameField.text;
         customNetworkManager.ConnectToClient(ip);
     }
 
     public void Create()
     {
         string ip = ipAddressField.text;
+        string name = nameField.text;
         customNetworkManager.ConnectToServer(ip);
     }
 

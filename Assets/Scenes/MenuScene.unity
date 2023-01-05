@@ -1607,7 +1607,6 @@ GameObject:
   - component: {fileID: 1285463178}
   - component: {fileID: 1285463179}
   - component: {fileID: 1285463180}
-  - component: {fileID: 1285463181}
   m_Layer: 0
   m_Name: CustomNetworkManager
   m_TagString: Untagged
@@ -1652,7 +1651,7 @@ MonoBehaviour:
   transport: {fileID: 1285463180}
   networkAddress: localhost
   maxConnections: 100
-  authenticator: {fileID: 1285463181}
+  authenticator: {fileID: 0}
   playerPrefab: {fileID: 5882478249878206985, guid: a999581ade3952744b5048f316692874, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -1685,28 +1684,6 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
---- !u!114 &1285463181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285463177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28496b776660156428f00cf78289c1ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnServerAuthenticated:
-    m_PersistentCalls:
-      m_Calls: []
-  OnClientAuthenticated:
-    m_PersistentCalls:
-      m_Calls: []
-  serverUsername: 
-  serverPassword: 
-  username: 
-  password: 
 --- !u!1 &1331584156
 GameObject:
   m_ObjectHideFlags: 0
