@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class MainMenuUIManager : MonoBehaviour
 {
+    [Header("Input Fields")]
     public InputField ipAddressField;
+    public InputField nameField;
+
     public GameObject mainMenuPanel;
     public GameObject createServerPanel;
     public GameObject joinServerPanel;
@@ -40,5 +43,14 @@ public class MainMenuUIManager : MonoBehaviour
     {
         string ip = ipAddressField.text;
         customNetworkManager.ConnectToServer(ip);
+    }
+
+    public void Back()
+    {
+        ipAddressField.gameObject.SetActive(false);
+        nameField.gameObject.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        createServerPanel.SetActive(false);
+        joinServerPanel.SetActive(false);
     }
 }

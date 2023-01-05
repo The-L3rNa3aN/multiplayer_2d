@@ -3,38 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : NetworkBehaviour
 {
     public float speed;
-    public float gravity;
-    private Vector3 yVel;
-    private CharacterController cc;
+    private Rigidbody2D rb;
+
+    private Vector2 movementHor;
+    private Vector2 movementVer;
 
     private void Start()
     {
-        if (!isLocalPlayer) return;
-        cc = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        float x = Input.GetAxis("Horizontal");
+        if (!isLocalPlayer) return;
+        movementHor = new Vector2(Input.GetAxis("Horizontal"), movementHor.y);
+    }
 
-        if(cc.isGrounded)
-        {
-            yVel.y = -2f;
-        }
-
-        if(Input.GetKeyDown(KeyCode.W) && cc.isGrounded)
-        {
-            yVel.y = Mathf.Sqrt(gravity * -2f);
-        }
-
-        yVel.y += gravity * Time.deltaTime;
-        Vector3 move = transform.right * x;
-
-        cc.Move(move * speed * Time.deltaTime);
-        cc.Move(yVel * Time.deltaTime);
+    private void FixedUpdate()
+    {
+        rb.velocity = (movementHor + movementVer) * speed;
     }
 }
