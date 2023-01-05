@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using kcp2k;
+using Mirror.Authenticators;
 
 [RequireComponent(typeof(KcpTransport))]
+[RequireComponent(typeof(BasicAuthenticator))]
 public class CustomNetworkManager : NetworkManager
 {
     public static CustomNetworkManager instance;
@@ -26,6 +28,6 @@ public class CustomNetworkManager : NetworkManager
     public void ConnectToServer(string ip)
     {
         networkAddress = ip;
-        StartServer();
+        StartHost();
     }
 }
