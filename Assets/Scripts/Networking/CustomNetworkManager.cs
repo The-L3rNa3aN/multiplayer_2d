@@ -17,15 +17,17 @@ public class CustomNetworkManager : NetworkManager
             instance = this;
     }
 
-    public void ConnectToClient(string ip)
+    public void ConnectToClient(string ip, string name)
     {
         networkAddress = ip;
+        PlayerPrefs.SetString("localPlayerName", name);
         StartClient();
     }
 
-    public void ConnectToServer(string ip)
+    public void ConnectToServer(string ip, string name)
     {
         networkAddress = ip;
+        PlayerPrefs.SetString("localPlayerName", name);
         StartHost();
     }
 }

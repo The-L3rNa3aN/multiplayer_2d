@@ -39,14 +39,14 @@ public class MainMenuUIManager : MonoBehaviour
     {
         string ip = ipAddressField.text;
         string name = nameField.text;
-        customNetworkManager.ConnectToClient(ip);
+        customNetworkManager.ConnectToClient(ip, name);
     }
 
     public void Create()
     {
         string ip = ipAddressField.text;
         string name = nameField.text;
-        customNetworkManager.ConnectToServer(ip);
+        customNetworkManager.ConnectToServer(ip, name);
     }
 
     public void Back()
