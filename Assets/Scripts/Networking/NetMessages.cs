@@ -4,20 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct Notification : NetworkMessage { public string content; }
-public class NetMessages : MonoBehaviour
+namespace VJ.Assets.Scripts.Networking
 {
-    [SerializeField] private Text notificationText = null;
-
-    private void Start()
+    public struct Notification : NetworkMessage { public string content; }
+    public class NetMessages : MonoBehaviour
     {
-        if (!NetworkClient.active) return;
+        [SerializeField] private Text notificationText = null;
 
-        NetworkClient.RegisterHandler<Notification>(OnNotification);
-    }
+        private void Start()
+        {
+            if (!NetworkClient.active) return;
 
-    private void OnNotification(Notification msg)
-    {
+            NetworkClient.RegisterHandler<Notification>(OnNotification);
+        }
 
+        private void OnNotification(Notification msg)
+        {
+
+        }
     }
 }

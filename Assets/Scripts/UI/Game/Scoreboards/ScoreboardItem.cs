@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using VJ.Assets.Scripts.Player;
 
-public class ScoreboardItem : MonoBehaviour
+namespace VJ.Assets.Scripts.UI.Game.Scoreboards
 {
-    public Text pName;
-    public Text pScore;
-    public void InitializeItem(PlayerTag playerTag)
+    public class ScoreboardItem : MonoBehaviour
     {
-        pName.text = playerTag.playerName;
-        pScore.text = playerTag.score.ToString();
+        public Text pName;
+        public Text pScore;
+        public void InitializeItem(PlayerTag playerTag)
+        {
+            pName.text = playerTag.playerName;
+            pScore.text = playerTag.score.ToString();
+        }
     }
 }

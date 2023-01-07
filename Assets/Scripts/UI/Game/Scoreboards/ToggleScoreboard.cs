@@ -1,38 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VJ.Assets.Scripts.Player;
 
-public class ToggleScoreboard : MonoBehaviour
+namespace VJ.Assets.Scripts.UI.Game.Scoreboards
 {
-    public GameObject scoreboardPanel;
-    public GameObject heading_name;
-    public GameObject heading_score;
-    public GameObject scoreboardItem;       //Prefab.
-
-    private void Update()
+    public class ToggleScoreboard : MonoBehaviour
     {
-        PlayerTag[] players = FindObjectsOfType<PlayerTag>();
+        public GameObject scoreboardPanel;
+        public GameObject heading_name;
+        public GameObject heading_score;
+        public GameObject scoreboardItem;       //Prefab.
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+        private void Update()
         {
-            scoreboardPanel.SetActive(true);
-            heading_name.SetActive(true);
-            heading_score.SetActive(true);
-            foreach(PlayerTag player in players)
+            PlayerTag[] players = FindObjectsOfType<PlayerTag>();
+
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                ScoreboardItem item = Instantiate(scoreboardItem, scoreboardPanel.transform).GetComponent<ScoreboardItem>();
-                item.InitializeItem(player);
+                scoreboardPanel.SetActive(true);
+                heading_name.SetActive(true);
+                heading_score.SetActive(true);
+                foreach (PlayerTag player in players)
+                {
+                    ScoreboardItem item = Instantiate(scoreboardItem, scoreboardPanel.transform).GetComponent<ScoreboardItem>();
+                    item.InitializeItem(player);
+                }
             }
-        }
-        else if(Input.GetKeyUp(KeyCode.Tab))
-        {
-            scoreboardPanel.SetActive(false);
-            heading_name.SetActive(false);
-            heading_score.SetActive(false);
-            var items = scoreboardPanel.GetComponentsInChildren<ScoreboardItem>();
-            foreach(var item in items)
+            else if (Input.GetKeyUp(KeyCode.Tab))
             {
-                Destroy(item.gameObject);
+                scoreboardPanel.SetActive(false);
+                heading_name.SetActive(false);
+                heading_score.SetActive(false);
+                var items = scoreboardPanel.GetComponentsInChildren<ScoreboardItem>();
+                foreach (var item in items)
+                {
+                    Destroy(item.gameObject);
+                }
             }
         }
     }

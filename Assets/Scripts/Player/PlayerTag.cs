@@ -4,24 +4,27 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
-public class PlayerTag : NetworkBehaviour
+namespace VJ.Assets.Scripts.Player
 {
-    public TextMeshPro nameplate;
-    public string playerName;
-    public int score;
-
-    private void Start()
+    public class PlayerTag : NetworkBehaviour
     {
-        if (!isLocalPlayer) return;
-        playerName = PlayerPrefs.GetString("localPlayerName");
-    }
+        public TextMeshPro nameplate;
+        public string playerName;
+        public int score;
 
-    private void Update()
-    {
-        CmdSetName(playerName);
-        nameplate.text = playerName;
-    }
+        private void Start()
+        {
+            if (!isLocalPlayer) return;
+            playerName = PlayerPrefs.GetString("localPlayerName");
+        }
 
-    [Command] public void CmdSetName(string n) => RpcSetName(n);
-    [ClientRpc] public void RpcSetName(string n) => playerName = n;
+        private void Update()
+        {
+            CmdSetName(playerName);
+            nameplate.text = playerName;
+        }
+
+        [Command] public void CmdSetName(string n) => RpcSetName(n);
+        [ClientRpc] public void RpcSetName(string n) => playerName = n;
+    }
 }

@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class Player : NetworkBehaviour
+namespace VJ.Assets.Scripts.Player
 {
-    public float speed;
-    private Rigidbody2D rb;
-
-    private Vector2 movementHor;
-    private Vector2 movementVer;
-
-    private void Start()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Player : NetworkBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        public float speed;
+        private Rigidbody2D rb;
 
-    private void Update()
-    {
-        if (!isLocalPlayer) return;
-        movementHor = new Vector2(Input.GetAxis("Horizontal"), movementHor.y);
-    }
+        private Vector2 movementHor;
+        private Vector2 movementVer;
 
-    private void FixedUpdate()
-    {
-        rb.velocity = (movementHor + movementVer) * speed;
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Update()
+        {
+            if (!isLocalPlayer) return;
+            movementHor = new Vector2(Input.GetAxis("Horizontal"), movementHor.y);
+        }
+
+        private void FixedUpdate()
+        {
+            rb.velocity = (movementHor + movementVer) * speed;
+        }
     }
 }

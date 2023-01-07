@@ -4,30 +4,33 @@ using UnityEngine;
 using Mirror;
 using kcp2k;
 
-[RequireComponent(typeof(KcpTransport))]
-public class CustomNetworkManager : NetworkManager
+namespace VJ.Assets.Scripts.Networking
 {
-    public static CustomNetworkManager instance;
-
-    public override void Awake()
+    [RequireComponent(typeof(KcpTransport))]
+    public class CustomNetworkManager : NetworkManager
     {
-        if (instance != null && instance != this)
-            Destroy(this);
-        else
-            instance = this;
-    }
+        public static CustomNetworkManager instance;
 
-    public void ConnectToClient(string ip, string name)
-    {
-        networkAddress = ip;
-        PlayerPrefs.SetString("localPlayerName", name);
-        StartClient();
-    }
+        public override void Awake()
+        {
+            if (instance != null && instance != this)
+                Destroy(this);
+            else
+                instance = this;
+        }
 
-    public void ConnectToServer(string ip, string name)
-    {
-        networkAddress = ip;
-        PlayerPrefs.SetString("localPlayerName", name);
-        StartHost();
+        public void ConnectToClient(string ip, string name)
+        {
+            networkAddress = ip;
+            PlayerPrefs.SetString("localPlayerName", name);
+            StartClient();
+        }
+
+        public void ConnectToServer(string ip, string name)
+        {
+            networkAddress = ip;
+            PlayerPrefs.SetString("localPlayerName", name);
+            StartHost();
+        }
     }
 }

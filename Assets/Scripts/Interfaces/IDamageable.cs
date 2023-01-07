@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+namespace VJ.Interfaces
 {
-    public void Damage(float damage);
+    public interface IDamageable
+    {
+        public void Damage(float damage);
+    }
 }
