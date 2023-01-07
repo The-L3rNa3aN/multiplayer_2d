@@ -7,6 +7,6 @@ namespace VJ.Assets.Scripts.UI.Game.Notifications
 {
     public class NotificationManager : MonoBehaviour
     {
-        [SerializeField] private Text[] messages;
+        public NotificationItem notifItem;
     }
 }

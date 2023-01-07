@@ -9,18 +9,18 @@ namespace VJ.Assets.Scripts.Networking
     public struct Notification : NetworkMessage { public string content; }
     public class NetMessages : MonoBehaviour
     {
-        [SerializeField] private Text notificationText = null;
+        public GameObject notificationText;
 
         private void Start()
         {
             if (!NetworkClient.active) return;
-
             NetworkClient.RegisterHandler<Notification>(OnNotification);
         }
 
         private void OnNotification(Notification msg)
         {
-
+            Text message = Instantiate(notificationText, transform).GetComponent<Text>();
+            message.text = msg.content;
         }
     }
 }

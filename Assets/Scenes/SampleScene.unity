@@ -877,17 +877,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865082104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce04ca3d0cc07fc4295aa6d6782978b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ffde3a627694b4bade58fead54f045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  notificationText: {fileID: 1726506260090030695, guid: aa97c42ced0bc2341be71b8371d76b73, type: 3}
 --- !u!1 &2080461652
 GameObject:
   m_ObjectHideFlags: 0

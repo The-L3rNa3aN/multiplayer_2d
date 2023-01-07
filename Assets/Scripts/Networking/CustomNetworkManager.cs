@@ -32,5 +32,16 @@ namespace VJ.Assets.Scripts.Networking
             PlayerPrefs.SetString("localPlayerName", name);
             StartHost();
         }
+
+        /*public override void OnClientConnect()
+        {
+            base.OnClientConnect();                             //DO NOT DELETE THIS LINE.
+            //Debug.Log("Connected to the server...");
+            string playerName = PlayerPrefs.GetString("localPlayerName");
+            if(!NetworkServer.activeHost)
+            {
+                NetworkServer.SendToAll(new Notification { content = playerName + " has joined the server." });
+            }
+        }*/
     }
 }
