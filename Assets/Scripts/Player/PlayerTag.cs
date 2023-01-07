@@ -7,7 +7,8 @@ using TMPro;
 public class PlayerTag : NetworkBehaviour
 {
     public TextMeshPro nameplate;
-    private string playerName;
+    public string playerName;
+    public int score;
 
     private void Start()
     {
