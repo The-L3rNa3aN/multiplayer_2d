@@ -12,15 +12,17 @@ namespace VJ.Assets.Scripts.UI.MainMenu
         public InputField ipAddressField;
         public InputField nameField;
 
+        [Header("Panels")]
         public GameObject mainMenuPanel;
         public GameObject createServerPanel;
         public GameObject joinServerPanel;
+
+        [Header("Empty Warning Text")]
+        public GameObject warningText;
+
         private CustomNetworkManager customNetworkManager;
 
-        private void Start()
-        {
-            customNetworkManager = CustomNetworkManager.instance;
-        }
+        private void Start() => customNetworkManager = CustomNetworkManager.instance;
 
         public void MainMenu_JoinServer()
         {
@@ -42,14 +44,22 @@ namespace VJ.Assets.Scripts.UI.MainMenu
         {
             string ip = ipAddressField.text;
             string name = nameField.text;
-            customNetworkManager.ConnectToClient(ip, name);
+
+            if(ip != "" && name != "")
+                customNetworkManager.ConnectToClient(ip, name);
+            else
+                StartCoroutine(DislayEmptyWarning());
         }
 
         public void Create()
         {
             string ip = ipAddressField.text;
             string name = nameField.text;
-            customNetworkManager.ConnectToServer(ip, name);
+
+            if (ip != "" && name != "")
+                customNetworkManager.ConnectToServer(ip, name);
+            else
+                StartCoroutine(DislayEmptyWarning());
         }
 
         public void Back()
@@ -59,6 +69,13 @@ namespace VJ.Assets.Scripts.UI.MainMenu
             mainMenuPanel.SetActive(true);
             createServerPanel.SetActive(false);
             joinServerPanel.SetActive(false);
+        }
+
+        private IEnumerator DislayEmptyWarning()
+        {
+            warningText.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            warningText.SetActive(false);
         }
     }
 }

@@ -17,8 +17,12 @@ namespace VJ.Assets.Scripts.Player
 
         private void Start()
         {
+            if(isLocalPlayer)
+            {
+                FollowCamera.instance.target = transform;
+            }
+
             rb = GetComponent<Rigidbody2D>();
-            CmdServerJoin();
         }
 
         private void Update()
@@ -30,11 +34,6 @@ namespace VJ.Assets.Scripts.Player
         private void FixedUpdate()
         {
             rb.velocity = (movementHor + movementVer) * speed;
-        }
-
-        [Command] private void CmdServerJoin()
-        {
-            //NetworkServer.SendToAll(new Notification { content = PlayerPrefs.GetString("localPlayerName") + " has joined the server." });
         }
     }
 }

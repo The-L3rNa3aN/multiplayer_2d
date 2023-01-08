@@ -35,13 +35,9 @@ namespace VJ.Assets.Scripts.Networking
 
         /*public override void OnClientConnect()
         {
-            base.OnClientConnect();                             //DO NOT DELETE THIS LINE.
-            //Debug.Log("Connected to the server...");
+            base.OnClientConnect();
             string playerName = PlayerPrefs.GetString("localPlayerName");
-            if(!NetworkServer.activeHost)
-            {
-                NetworkServer.SendToAll(new Notification { content = playerName + " has joined the server." });
-            }
+            NetworkServer.SendToAll(new TestNotification { content = playerName + " has joined." });
         }*/
     }
 }
