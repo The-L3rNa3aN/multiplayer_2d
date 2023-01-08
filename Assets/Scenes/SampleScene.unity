@@ -451,6 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  offset: {x: 0, y: 0, z: -10}
+  smooth: 0.125
 --- !u!1 &675381142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1137,7 @@ GameObject:
   - component: {fileID: 2080461653}
   - component: {fileID: 2080461655}
   - component: {fileID: 2080461656}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1243,7 +1245,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080461652}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0

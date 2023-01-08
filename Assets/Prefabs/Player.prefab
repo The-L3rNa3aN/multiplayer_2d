@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 5882478249878206988}
   - component: {fileID: 7104772567389297447}
   - component: {fileID: 653070441369039507}
+  - component: {fileID: -3635851421164639223}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -278,6 +279,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   speed: 10
+  gConstant: -10
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  isGrounded: 0
 --- !u!114 &4030783577958448261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,8 +299,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  playerName: 
   nameplate: {fileID: 7520271783832816891}
+  playerName: 
+  score: 0
 --- !u!114 &5882478249878206988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,13 +333,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_AngularDrag: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &653070441369039507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,3 +369,19 @@ MonoBehaviour:
   compressRotation: 0
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!70 &-3635851421164639223
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882478249878206985}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

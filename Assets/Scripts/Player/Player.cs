@@ -9,11 +9,16 @@ namespace VJ.Assets.Scripts.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : NetworkBehaviour
     {
-        public float speed;
         private Rigidbody2D rb;
 
+        public float speed;
         private Vector2 movementHor;
-        private Vector2 movementVer;
+
+        [Header("Gravity")]
+        public float gConstant;
+        public LayerMask groundMask;
+        private Vector2 gravity;
+        [SerializeField] private bool isGrounded;
 
         private void Start()
         {
@@ -28,12 +33,22 @@ namespace VJ.Assets.Scripts.Player
         private void Update()
         {
             if (!isLocalPlayer) return;
-            movementHor = new Vector2(Input.GetAxis("Horizontal"), movementHor.y);
+
+            //Gravity code here.
+            isGrounded = Physics2D.Raycast(transform.position, -transform.up, 0.6f, groundMask);
+
+            movementHor = new Vector2(Input.GetAxis("Horizontal"), 0f);
         }
 
         private void FixedUpdate()
         {
-            rb.velocity = (movementHor + movementVer) * speed;
+            if(isGrounded && gravity.y < 0f)
+            {
+                gravity.y = -2f;
+            }
+
+            gravity.y += gConstant * Time.fixedDeltaTime;
+            rb.velocity = movementHor * speed + gravity * Time.fixedDeltaTime;
         }
     }
 }
