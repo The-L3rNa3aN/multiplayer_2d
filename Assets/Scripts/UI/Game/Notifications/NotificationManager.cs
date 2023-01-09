@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VJ.Assets.Scripts.UI.Game.Notifications
+namespace VJ.UI.Game.Notifications
 {
     public class NotificationManager : MonoBehaviour
     {

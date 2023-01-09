@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VJ.Assets.Scripts.Networking
+namespace VJ.Networking
 {
     public struct Notification : NetworkMessage { public string content; }
     public class NetMessages : MonoBehaviour

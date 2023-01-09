@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
-namespace VJ.Assets.Scripts.Player
+namespace VJ.Client
 {
     public class PlayerTag : NetworkBehaviour
     {

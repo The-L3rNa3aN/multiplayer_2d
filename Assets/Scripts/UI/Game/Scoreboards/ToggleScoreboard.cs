@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VJ.Assets.Scripts.Player;
+using VJ.Client;
 
-namespace VJ.Assets.Scripts.UI.Game.Scoreboards
+namespace VJ.UI.Game.Scoreboards
 {
     public class ToggleScoreboard : MonoBehaviour
     {

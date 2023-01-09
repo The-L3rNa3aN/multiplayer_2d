@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-namespace VJ.Assets.Scripts
+namespace VJ
 {
     public class FollowCamera : MonoBehaviour
     {

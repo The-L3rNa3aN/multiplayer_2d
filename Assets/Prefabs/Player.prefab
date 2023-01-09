@@ -279,7 +279,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   speed: 10
-  gConstant: -10
+  gConstant: -20
   groundMask:
     serializedVersion: 2
     m_Bits: 8

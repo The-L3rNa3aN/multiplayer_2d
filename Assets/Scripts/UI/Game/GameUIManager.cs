@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using VJ.Assets.Scripts.Networking;
+using VJ.Networking;
 
-namespace VJ.Assets.Scripts.UI.Game
+namespace VJ.UI.Game
 {
     public class GameUIManager : MonoBehaviour
     {
