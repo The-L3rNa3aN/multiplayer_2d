@@ -4,7 +4,6 @@ using UnityEngine;
 using Mirror;
 using kcp2k;
 using VJ.Client;
-using UnityEngine.SceneManagement;
 
 namespace VJ.Networking
 {
@@ -13,6 +12,9 @@ namespace VJ.Networking
     {
         public static CustomNetworkManager instance;
         public int playerCount;
+
+        [Header("Local player related")]
+        public bool isPlayerServer;
 
         public override void Awake()
         {
@@ -45,21 +47,21 @@ namespace VJ.Networking
             StartHost();
         }
 
+        public void DisconnectServer()
+        {
+            if (isPlayerServer)
+                StopServer();
+            else
+                StopClient();
+        }
+
         public override void OnServerConnect(NetworkConnectionToClient conn)
         {
-            //base.OnServerConnect(conn);
             if(playerCount >= maxConnections)
             {
                 conn.Disconnect();
                 return;
             }
         }
-
-        /*public override void OnClientConnect()
-        {
-            base.OnClientConnect();
-            string playerName = PlayerPrefs.GetString("localPlayerName");
-            NetworkServer.SendToAll(new TestNotification { content = playerName + " has joined." });
-        }*/
     }
 }

@@ -25,6 +25,8 @@ namespace VJ.Client
             if(isLocalPlayer)
             {
                 FollowCamera.instance.target = transform;
+                if(isServer)
+                    CustomNetworkManager.instance.isPlayerServer = true;
             }
 
             rb = GetComponent<Rigidbody2D>();

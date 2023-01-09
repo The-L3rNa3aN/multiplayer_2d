@@ -12,5 +12,10 @@ namespace VJ.UI.Game
         {
             NetworkServer.SendToAll(new Notification { content = "Test" });
         }
+
+        public void Disconnect()
+        {
+            CustomNetworkManager.instance.DisconnectServer();
+        }
     }
 }
