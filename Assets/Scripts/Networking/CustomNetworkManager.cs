@@ -15,6 +15,7 @@ namespace VJ.Networking
 
         [Header("Local player related")]
         public bool isPlayerServer;
+        public string playerName;
 
         public override void Awake()
         {
@@ -36,6 +37,7 @@ namespace VJ.Networking
         {
             networkAddress = ip;
             PlayerPrefs.SetString("localPlayerName", name);
+            playerName = name;
             StartClient();
         }
 
@@ -44,6 +46,7 @@ namespace VJ.Networking
             networkAddress = ip;
             PlayerPrefs.SetString("localPlayerName", name);
             maxConnections = count;
+            playerName = name;
             StartHost();
         }
 
@@ -63,5 +66,19 @@ namespace VJ.Networking
                 return;
             }
         }
+
+        #region Room callbacks
+
+        public override void OnRoomClientEnter()            //When a client enters a room.
+        {
+            base.OnRoomClientEnter();
+        }
+
+        public override void OnRoomClientExit()
+        {
+            base.OnRoomClientExit();
+        }
+
+        #endregion
     }
 }
