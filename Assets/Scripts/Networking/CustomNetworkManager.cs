@@ -8,7 +8,7 @@ using VJ.Client;
 namespace VJ.Networking
 {
     [RequireComponent(typeof(KcpTransport))]
-    public class CustomNetworkManager : NetworkManager
+    public class CustomNetworkManager : NetworkRoomManager //NetworkManager
     {
         public static CustomNetworkManager instance;
         public int playerCount;
