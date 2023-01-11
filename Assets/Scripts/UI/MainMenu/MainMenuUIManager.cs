@@ -10,7 +10,6 @@ namespace VJ.UI.MainMenu
     public class MainMenuUIManager : MonoBehaviour
     {
         [Header("Input Fields")]
-        public InputField ipAddressField;
         public InputField nameField;
         public InputField maxPlayersField;
 
@@ -31,7 +30,6 @@ namespace VJ.UI.MainMenu
         {
             mainMenuPanel.SetActive(false);
             joinServerPanel.SetActive(true);
-            ipAddressField.gameObject.SetActive(true);
             nameField.gameObject.SetActive(true);
         }
 
@@ -39,32 +37,29 @@ namespace VJ.UI.MainMenu
         {
             mainMenuPanel.SetActive(false);
             createServerPanel.SetActive(true);
-            ipAddressField.gameObject.SetActive(true);
             nameField.gameObject.SetActive(true);
             maxPlayersField.gameObject.SetActive(true);
         }
 
         public void Join()
         {
-            string ip = ipAddressField.text;
             string name = nameField.text;
 
-            if (ip != "" && name != "")
-                customNetworkManager.ConnectToClient(ip, name);
+            if (name != "")
+                customNetworkManager.ConnectToClient(name);
             else
                 StartCoroutine(DislayEmptyWarning());
         }
 
         public void Create()
         {
-            string ip = ipAddressField.text;
             string name = nameField.text;
             int count = Int32.Parse(maxPlayersField.text);
 
-            if (ip != "" && name != "")
+            if (name != "")
             {
                 if (count > 1 && count <= 20)
-                    customNetworkManager.ConnectToServer(ip, name, count);
+                    customNetworkManager.ConnectToServer(name, count);
                 else
                     StartCoroutine(DisplayMaxPlayerCountWarning());
             }
@@ -74,7 +69,6 @@ namespace VJ.UI.MainMenu
 
         public void Back()
         {
-            ipAddressField.gameObject.SetActive(false);
             nameField.gameObject.SetActive(false);
             mainMenuPanel.SetActive(true);
             createServerPanel.SetActive(false);

@@ -1,3 +1,4 @@
+using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace VJ.Networking
                 Destroy(this);
             else
                 instance = this;
+
+            networkAddress = GetIP();
         }
 
         public override void Update()
@@ -33,17 +36,15 @@ namespace VJ.Networking
             playerCount = players.Length;
         }
 
-        public void ConnectToClient(string ip, string name)
+        public void ConnectToClient(string name)
         {
-            networkAddress = ip;
             PlayerPrefs.SetString("localPlayerName", name);
             playerName = name;
             StartClient();
         }
 
-        public void ConnectToServer(string ip, string name, int count)
+        public void ConnectToServer(string name, int count)
         {
-            networkAddress = ip;
             PlayerPrefs.SetString("localPlayerName", name);
             maxConnections = count;
             playerName = name;
@@ -69,16 +70,16 @@ namespace VJ.Networking
 
         #region Room callbacks
 
-        public override void OnRoomClientEnter()            //When a client enters a room.
-        {
-            base.OnRoomClientEnter();
-        }
-
-        public override void OnRoomClientExit()
-        {
-            base.OnRoomClientExit();
-        }
+        
 
         #endregion
+
+        public string GetIP()
+        {
+            string strHostName = Dns.GetHostName();
+            IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
+            IPAddress[] addr = ipEntry.AddressList;
+            return addr[addr.Length - 1].ToString();
+        }
     }
 }
