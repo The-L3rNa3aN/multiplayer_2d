@@ -74,6 +74,12 @@ namespace VJ.Lobby.UI
         public void UpdatePlayerList()
         {
             //Assuming I'm not using prefabs and I'm using a pre-existing pool of empty and inactive objects.
+            //TO DO: have the host's name to always be on the top and the text colored in blue.
+
+            for(int i = 0; i < listItems.Length; i++)
+            {
+                //Delete the stuff in the objects and separate child and parents (is that even optimal?)
+            }
 
             for(int i = 0; i < playerList.Length; i++)
             {
