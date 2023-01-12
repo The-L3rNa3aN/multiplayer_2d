@@ -886,7 +886,6 @@ GameObject:
   - component: {fileID: 1865082108}
   - component: {fileID: 1865082107}
   - component: {fileID: 1865082106}
-  - component: {fileID: 1865082109}
   m_Layer: 5
   m_Name: Notifications
   m_TagString: Untagged
@@ -978,19 +977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865082104}
   m_CullTransparentMesh: 1
---- !u!114 &1865082109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865082104}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ffde3a627694b4bade58fead54f045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notificationText: {fileID: 1726506260090030695, guid: aa97c42ced0bc2341be71b8371d76b73, type: 3}
 --- !u!1 &2018534109
 GameObject:
   m_ObjectHideFlags: 0

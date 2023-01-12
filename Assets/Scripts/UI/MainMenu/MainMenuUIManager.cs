@@ -12,6 +12,7 @@ namespace VJ.UI.MainMenu
         [Header("Input Fields")]
         public InputField nameField;
         public InputField maxPlayersField;
+        public InputField ipField;
 
         [Header("Panels")]
         public GameObject mainMenuPanel;
@@ -31,6 +32,7 @@ namespace VJ.UI.MainMenu
             mainMenuPanel.SetActive(false);
             joinServerPanel.SetActive(true);
             nameField.gameObject.SetActive(true);
+            ipField.gameObject.SetActive(true);
         }
 
         public void MainMenu_CreateServer()
@@ -44,9 +46,10 @@ namespace VJ.UI.MainMenu
         public void Join()
         {
             string name = nameField.text;
+            string ip = ipField.text;
 
             if (name != "")
-                customNetworkManager.ConnectToClient(name);
+                customNetworkManager.ConnectToClient(name, ip);
             else
                 StartCoroutine(DislayEmptyWarning());
         }

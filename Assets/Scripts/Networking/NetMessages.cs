@@ -14,7 +14,7 @@ namespace VJ.Networking
         private void Start()
         {
             if (!NetworkClient.active) return;
-            NetworkClient.RegisterHandler<Notification>(OnNotification);
+            NetworkClient.ReplaceHandler<Notification>(OnNotification);
         }
 
         private void OnNotification(Notification msg)

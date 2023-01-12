@@ -36,10 +36,11 @@ namespace VJ.Networking
             playerCount = players.Length;
         }
 
-        public void ConnectToClient(string name)
+        public void ConnectToClient(string name, string ip)
         {
             PlayerPrefs.SetString("localPlayerName", name);
             playerName = name;
+            networkAddress = ip;
             StartClient();
         }
 
@@ -57,6 +58,8 @@ namespace VJ.Networking
                 StopServer();
             else
                 StopClient();
+
+            networkAddress = GetIP();
         }
 
         public override void OnServerConnect(NetworkConnectionToClient conn)
