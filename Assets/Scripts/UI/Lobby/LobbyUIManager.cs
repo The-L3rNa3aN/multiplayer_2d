@@ -22,8 +22,8 @@ namespace VJ.Lobby.UI
         public GameObject playerListItem;       //Prefab.
         private MyRoomPlayer[] playerList;
         public Transform playerListContainer;
-        private int n;
-        [HideInInspector] public PlayerListItem[] listItems;            //For later.
+        public Transform emptyListPool;
+        private int activeCount;                                        //Number of active items in the list.
 
         [Header("Chat")]
         public InputField chatInputField;
@@ -47,55 +47,52 @@ namespace VJ.Lobby.UI
             customNetworkManager = CustomNetworkManager.instance;
         }
 
-        private void OnGUI()
+        private void Update()
         {
             playerList = FindObjectsOfType<MyRoomPlayer>();
-            int count = playerList.Length;
+        }
 
-            foreach (MyRoomPlayer player in playerList)                                     //Not optimal at all. I need to find another way to have this updated at all times.
+        private void OnGUI()
+        {
+            for(int i = 0; i < playerListContainer.childCount; i++)
             {
-                NetworkRoomPlayer roomPlayer = player.GetComponent<NetworkRoomPlayer>();
-                if(n < count)
+                Transform child = playerListContainer.GetChild(i);
+                if(child.GetComponent<PlayerListItem>().linkedRoomPlayer == null)
                 {
-                    n++;
-                    PlayerListItem item = Instantiate(playerListItem, playerListContainer).GetComponent<PlayerListItem>();
-                    string pName = player.playerName;
-                    string rState = "";
-                    if (roomPlayer.readyToBegin)
-                        rState = "READY";
-                    else
-                        rState = "NOT READY";
-
-                    item.Initialize(pName, rState);
+                    child.SetParent(emptyListPool);
+                    child.GetComponent<PlayerListItem>().linkedRoomPlayer = default;
+                    child.gameObject.SetActive(false);
                 }
             }
         }
 
-        public void UpdatePlayerList()
+        #region Player List Functions
+        public void UpdateReadyState()
         {
-            //Assuming I'm not using prefabs and I'm using a pre-existing pool of empty and inactive objects.
-            //TO DO: have the host's name to always be on the top and the text colored in blue.
-
-            for(int i = 0; i < listItems.Length; i++)
-            {
-                //Delete the stuff in the objects and separate child and parents (is that even optimal?)
-            }
-
-            for(int i = 0; i < playerList.Length; i++)
-            {
-                NetworkRoomPlayer roomPlayer = playerList[i].GetComponent<NetworkRoomPlayer>();
-                string pName = playerList[i].playerName;
-                string rState = "";
-                if (roomPlayer.readyToBegin)
-                    rState = "READY";
-                else
-                    rState = "NOT READY";
-
-                listItems[i].gameObject.SetActive(true);                                        //Because they are initially inactive.
-                listItems[i].transform.SetParent(chatContainer, false);
-                listItems[i].Initialize(pName, rState);
-            }
+            //Update ready states of each item in the list.
         }
+
+        public void AddNewItem()
+        {
+            float itemCount = 0;
+            float roomPlayerCount = playerList.Length;
+
+            for (int i = 0; i < emptyListPool.childCount; i++)
+            {
+                if (emptyListPool.GetChild(i).gameObject.activeSelf)
+                    itemCount++;
+            }
+
+            if (itemCount < roomPlayerCount)            //WHY THE FUCK IS THIS NOT WORKING?!
+            {
+                Debug.Log("Test");
+                Transform newItem = emptyListPool.GetChild(0);
+                newItem.SetParent(playerListContainer);
+                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[playerList.Length - 1]);
+                newItem.gameObject.SetActive(true);
+            }
+        }   
+        #endregion
 
         public void ChangeReadyState()
         {

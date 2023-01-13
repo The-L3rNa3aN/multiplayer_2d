@@ -5,6 +5,7 @@ using UnityEngine;
 using Mirror;
 using kcp2k;
 using VJ.Client;
+using VJ.Lobby.UI;
 
 namespace VJ.Networking
 {
@@ -73,7 +74,12 @@ namespace VJ.Networking
 
         #region Room callbacks
 
-        
+        public override void OnRoomClientEnter()
+        {
+            base.OnRoomClientEnter();
+
+            LobbyUIManager.instance.AddNewItem();
+        }
 
         #endregion
 

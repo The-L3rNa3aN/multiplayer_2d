@@ -16,7 +16,10 @@ namespace VJ.Client
             if (!isLocalPlayer) return;
 
             playerName = CustomNetworkManager.instance.playerName;
-            LobbyUIManager.instance.localPlayer = GetComponent<NetworkRoomPlayer>();
+            LobbyUIManager lobbyManager = LobbyUIManager.instance;
+
+            lobbyManager.localPlayer = GetComponent<NetworkRoomPlayer>();
+            //lobbyManager.AddNewItem(this);
         }
     }
 }
