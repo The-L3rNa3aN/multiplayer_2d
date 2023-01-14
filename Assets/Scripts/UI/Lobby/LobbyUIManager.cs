@@ -17,10 +17,11 @@ namespace VJ.Lobby.UI
         public Button button_notReady;
 
         [Header("Player List")]
-        private MyRoomPlayer[] playerList;
+        [SerializeField] private MyRoomPlayer[] playerList;
         public Transform playerListContainer;
         public Transform emptyListPool;
         private int itemCount;                  //Number of active items in the list.
+        private int playerCount;                //Number of players in the server.
 
         [Header("Chat")]
         public InputField chatInputField;
@@ -39,45 +40,23 @@ namespace VJ.Lobby.UI
                 instance = this;
         }
 
-        private void Start()
-        {
-            customNetworkManager = CustomNetworkManager.instance;
-        }
+        private void Start() => customNetworkManager = CustomNetworkManager.instance;
 
         private void Update()
         {
             playerList = FindObjectsOfType<MyRoomPlayer>();
-            AddItem();
-        }
+            playerCount = playerList.Length;
+            itemCount = playerListContainer.childCount;
 
-        private void OnGUI()
-        {
-            for(int i = 0; i < playerListContainer.childCount; i++)
-            {
-                Transform child = playerListContainer.GetChild(i);
-                if(child.GetComponent<PlayerListItem>().linkedRoomPlayer == null)
-                {
-                    child.SetParent(emptyListPool);
-                    child.GetComponent<PlayerListItem>().linkedRoomPlayer = default;
-                    child.gameObject.SetActive(false);
-                }
-            }
+            AddItem();
+            RemoveItems();
         }
 
         #region Player List Functions
         public void UpdateReadyState() { } //Update ready states of each item in the list.
 
-        public void AddItem()
+        public void AddItem()                                   //Adds items when there are new players in the server.
         {
-            PlayerListItem[] listItems = FindObjectsOfType<PlayerListItem>();
-            int playerCount = playerList.Length;
-
-            for (int i = 0; i < listItems.Length; i++)
-            {
-                if (listItems[i].gameObject.activeSelf)
-                    itemCount++;
-            }
-
             if (itemCount > playerCount)
                 itemCount = playerCount;
 
@@ -85,14 +64,23 @@ namespace VJ.Lobby.UI
             {
                 Transform newItem = emptyListPool.GetChild(0);
                 newItem.SetParent(playerListContainer);
-                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[playerList.Length - 1]);
+                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[0]);                //The top-most element is the newest.
                 newItem.gameObject.SetActive(true);
             }
         }
 
-        public void RemoveItems()
+        public void RemoveItems()                               //Removes items when players leave the server.
         {
-            //Remove when the player leaves the room.
+            for (int i = 0; i < playerListContainer.childCount; i++)
+            {
+                Transform child = playerListContainer.GetChild(i);
+                if (child.GetComponent<PlayerListItem>().linkedRoomPlayer == null)
+                {
+                    child.SetParent(emptyListPool);
+                    child.GetComponent<PlayerListItem>().linkedRoomPlayer = default;
+                    child.gameObject.SetActive(false);
+                }
+            }
         }
         #endregion
 
@@ -112,14 +100,10 @@ namespace VJ.Lobby.UI
             }
         }
 
-        public void Disconnect()
-        {
-            //Disconnect.
-        }
+        public void Disconnect() { } //Disconnect.
 
-        public void Send()
+        public void Send()                                      //Send message in chat.
         {
-            //Send message in chat.
             if(chatInputField.text != null || chatInputField.text != "")
             {
                 string chatText = chatInputField.text;

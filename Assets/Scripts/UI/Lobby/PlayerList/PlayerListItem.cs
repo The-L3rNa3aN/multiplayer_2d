@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using VJ.Client;
+using Mirror;
 
 namespace VJ
 {
@@ -10,17 +11,24 @@ namespace VJ
         public Text UIReadyState;
         public MyRoomPlayer linkedRoomPlayer = default;
 
-        public void Initialize(string playerName, string readyState)
+        private void OnGUI()
         {
-            UIPlayerName.text = playerName;
-            UIReadyState.text = readyState;
+            if(linkedRoomPlayer != null || linkedRoomPlayer == default)
+                UIPlayerName.text = linkedRoomPlayer.playerName;
+
+            NetworkRoomPlayer nrp = linkedRoomPlayer.GetComponent<NetworkRoomPlayer>();
+            if (nrp.readyToBegin)
+            {
+                UIReadyState.text = "READY";
+                UIReadyState.color = Color.green;
+            }
+            else
+            {
+                UIReadyState.text = "READY";
+                UIReadyState.color = Color.red;
+            }
         }
 
-        public void SetPlayerName(MyRoomPlayer roomPlayer)
-        {
-            UIPlayerName.text = roomPlayer.playerName;
-            linkedRoomPlayer = roomPlayer;
-        }
-        public void SetReadyState(string readyState) => UIReadyState.text = readyState;
+        public void SetPlayerName(MyRoomPlayer roomPlayer) => linkedRoomPlayer = roomPlayer;
     }
 }
