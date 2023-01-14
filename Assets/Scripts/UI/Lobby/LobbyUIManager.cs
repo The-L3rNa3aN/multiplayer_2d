@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using VJ.Client;
 using VJ.Networking;
-using static UnityEditor.Progress;
 
 namespace VJ.Lobby.UI
 {
@@ -19,11 +17,10 @@ namespace VJ.Lobby.UI
         public Button button_notReady;
 
         [Header("Player List")]
-        public GameObject playerListItem;       //Prefab.
         private MyRoomPlayer[] playerList;
         public Transform playerListContainer;
         public Transform emptyListPool;
-        private int activeCount;                                        //Number of active items in the list.
+        private int itemCount;                  //Number of active items in the list.
 
         [Header("Chat")]
         public InputField chatInputField;
@@ -50,6 +47,7 @@ namespace VJ.Lobby.UI
         private void Update()
         {
             playerList = FindObjectsOfType<MyRoomPlayer>();
+            AddItem();
         }
 
         private void OnGUI()
@@ -67,31 +65,35 @@ namespace VJ.Lobby.UI
         }
 
         #region Player List Functions
-        public void UpdateReadyState()
-        {
-            //Update ready states of each item in the list.
-        }
+        public void UpdateReadyState() { } //Update ready states of each item in the list.
 
-        public void AddNewItem()
+        public void AddItem()
         {
-            float itemCount = 0;
-            float roomPlayerCount = playerList.Length;
+            PlayerListItem[] listItems = FindObjectsOfType<PlayerListItem>();
+            int playerCount = playerList.Length;
 
-            for (int i = 0; i < emptyListPool.childCount; i++)
+            for (int i = 0; i < listItems.Length; i++)
             {
-                if (emptyListPool.GetChild(i).gameObject.activeSelf)
+                if (listItems[i].gameObject.activeSelf)
                     itemCount++;
             }
 
-            if (itemCount < roomPlayerCount)            //WHY THE FUCK IS THIS NOT WORKING?!
+            if (itemCount > playerCount)
+                itemCount = playerCount;
+
+            if (itemCount < playerCount)
             {
-                Debug.Log("Test");
                 Transform newItem = emptyListPool.GetChild(0);
                 newItem.SetParent(playerListContainer);
                 newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[playerList.Length - 1]);
                 newItem.gameObject.SetActive(true);
             }
-        }   
+        }
+
+        public void RemoveItems()
+        {
+            //Remove when the player leaves the room.
+        }
         #endregion
 
         public void ChangeReadyState()

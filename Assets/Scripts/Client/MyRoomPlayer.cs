@@ -19,7 +19,6 @@ namespace VJ.Client
             LobbyUIManager lobbyManager = LobbyUIManager.instance;
 
             lobbyManager.localPlayer = GetComponent<NetworkRoomPlayer>();
-            //lobbyManager.AddNewItem(this);
         }
     }
 }

@@ -74,12 +74,7 @@ namespace VJ.Networking
 
         #region Room callbacks
 
-        public override void OnRoomClientEnter()
-        {
-            base.OnRoomClientEnter();
-
-            LobbyUIManager.instance.AddNewItem();
-        }
+        
 
         #endregion
 
