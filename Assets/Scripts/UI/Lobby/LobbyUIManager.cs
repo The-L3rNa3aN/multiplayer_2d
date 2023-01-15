@@ -60,12 +60,13 @@ namespace VJ.Lobby.UI
             if (itemCount > playerCount)
                 itemCount = playerCount;
 
-            if (itemCount < playerCount)
+            for (int i = itemCount; i < playerCount;)
             {
                 Transform newItem = emptyListPool.GetChild(0);
                 newItem.SetParent(playerListContainer);
-                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[0]);                //The top-most element is the newest.
                 newItem.gameObject.SetActive(true);
+                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[i]);
+                i++;
             }
         }
 
