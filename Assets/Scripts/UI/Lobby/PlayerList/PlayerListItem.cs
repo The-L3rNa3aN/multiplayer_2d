@@ -13,7 +13,10 @@ namespace VJ
 
         private void OnGUI()
         {
-            if(linkedRoomPlayer != null || linkedRoomPlayer == default)
+            if (linkedRoomPlayer == null)
+                linkedRoomPlayer = default;
+
+            if(linkedRoomPlayer != default || linkedRoomPlayer != null)
                 UIPlayerName.text = linkedRoomPlayer.playerName;
 
             NetworkRoomPlayer nrp = linkedRoomPlayer.GetComponent<NetworkRoomPlayer>();
@@ -24,7 +27,7 @@ namespace VJ
             }
             else
             {
-                UIReadyState.text = "READY";
+                UIReadyState.text = "NOT READY";
                 UIReadyState.color = Color.red;
             }
         }

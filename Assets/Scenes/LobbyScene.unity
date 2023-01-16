@@ -5390,10 +5390,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button_ready: {fileID: 1141813370}
   button_notReady: {fileID: 340044240}
-  playerListItem: {fileID: 8706055855109058361, guid: 3e8da8540e1777c408043bc34e168cda, type: 3}
+  playerList: []
   playerListContainer: {fileID: 145746386}
   emptyListPool: {fileID: 2008271445}
-  listItems: []
+  itemCount: 0
+  playerCount: 0
   chatInputField: {fileID: 581028118}
   chatMessage: {fileID: 9184544780224486453, guid: 339a33f4dc747004c82e02491a11b405, type: 3}
   chatContainer: {fileID: 591082003}

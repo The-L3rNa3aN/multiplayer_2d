@@ -20,8 +20,8 @@ namespace VJ.Lobby.UI
         [SerializeField] private MyRoomPlayer[] playerList;
         public Transform playerListContainer;
         public Transform emptyListPool;
-        private int itemCount;                  //Number of active items in the list.
-        private int playerCount;                //Number of players in the server.
+        [SerializeField] private int itemCount;                  //Number of active items in the list.
+        [SerializeField] private int playerCount;                //Number of players in the server.
 
         [Header("Chat")]
         public InputField chatInputField;
@@ -53,20 +53,18 @@ namespace VJ.Lobby.UI
         }
 
         #region Player List Functions
-        public void UpdateReadyState() { } //Update ready states of each item in the list.
-
         public void AddItem()                                   //Adds items when there are new players in the server.
         {
             if (itemCount > playerCount)
                 itemCount = playerCount;
 
-            for (int i = itemCount; i < playerCount;)
+            for (int i = itemCount; i < playerCount; i++)
             {
-                Transform newItem = emptyListPool.GetChild(0);
+                Transform newItem = emptyListPool.GetChild(0);  //The first object in the pool.
                 newItem.SetParent(playerListContainer);
                 newItem.gameObject.SetActive(true);
-                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[i]);
-                i++;
+                newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[i]);        //This doesn't work for players who are already in the server.
+                //i++;
             }
         }
 
@@ -89,19 +87,19 @@ namespace VJ.Lobby.UI
         {
             if(!localPlayer.readyToBegin)
             {
-                localPlayer.readyToBegin = true;
+                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(true); //localPlayer.readyToBegin = true;
                 button_ready.gameObject.SetActive(false);
                 button_notReady.gameObject.SetActive(true);
             }
             else
             {
-                localPlayer.readyToBegin = false;
+                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(false); //localPlayer.readyToBegin = false;
                 button_ready.gameObject.SetActive(true);
                 button_notReady.gameObject.SetActive(false);
             }
         }
 
-        public void Disconnect() { } //Disconnect.
+        public void Disconnect() => customNetworkManager.DisconnectServer();
 
         public void Send()                                      //Send message in chat.
         {

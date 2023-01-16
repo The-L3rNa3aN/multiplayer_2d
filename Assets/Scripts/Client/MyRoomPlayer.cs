@@ -8,14 +8,16 @@ namespace VJ.Client
     public class MyRoomPlayer : NetworkBehaviour
     {
         [SyncVar] public string playerName;
+        private NetworkRoomPlayer nrp;
 
         private void Start()
         {
             if (!isLocalPlayer) return;
 
             CmdSetName();
+            nrp = GetComponent<NetworkRoomPlayer>();
             LobbyUIManager lobbyManager = LobbyUIManager.instance;
-            lobbyManager.localPlayer = GetComponent<NetworkRoomPlayer>();
+            lobbyManager.localPlayer = nrp;
         }
 
         [Command] public void CmdSetName() => RpcSetName();

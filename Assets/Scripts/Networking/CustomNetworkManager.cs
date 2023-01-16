@@ -2,6 +2,7 @@ using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 using kcp2k;
 using VJ.Client;
@@ -33,8 +34,11 @@ namespace VJ.Networking
         {
             base.Update();              //Just in case.
 
-            var players = FindObjectsOfType<Player>();
-            playerCount = players.Length;
+            if(SceneManager.GetActiveScene().name == "OnlineScene")
+            {
+                var players = FindObjectsOfType<Player>();
+                playerCount = players.Length;
+            }
         }
 
         public void ConnectToClient(string name, string ip)
@@ -56,7 +60,7 @@ namespace VJ.Networking
         public void DisconnectServer()
         {
             if (isPlayerServer)
-                StopServer();
+                StopHost();
             else
                 StopClient();
 
@@ -72,12 +76,6 @@ namespace VJ.Networking
             }
         }
 
-        #region Room callbacks
-
-        
-
-        #endregion
-
         public string GetIP()
         {
             string strHostName = Dns.GetHostName();
@@ -85,5 +83,15 @@ namespace VJ.Networking
             IPAddress[] addr = ipEntry.AddressList;
             return addr[addr.Length - 1].ToString();
         }
+
+        #region Room Callbacks
+
+        public override void OnRoomServerPlayersReady()
+        {
+            base.OnRoomServerPlayersReady();
+            Debug.Log("All players are ready. Loading level...");
+        }
+
+        #endregion
     }
 }
