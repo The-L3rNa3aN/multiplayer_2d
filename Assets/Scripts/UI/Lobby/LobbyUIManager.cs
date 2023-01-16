@@ -15,6 +15,7 @@ namespace VJ.Lobby.UI
         [Header("UI References")]
         public Button button_ready;
         public Button button_notReady;
+        public Text timerDisplay;
 
         [Header("Player List")]
         [SerializeField] private MyRoomPlayer[] playerList;
@@ -41,6 +42,12 @@ namespace VJ.Lobby.UI
         }
 
         private void Start() => customNetworkManager = CustomNetworkManager.instance;
+
+        private void OnGUI()
+        {
+            string t = customNetworkManager.timer.ToString();
+            timerDisplay.text = "Match begins in + " + t + "...";
+        }
 
         private void Update()
         {

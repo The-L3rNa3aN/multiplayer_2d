@@ -11,7 +11,7 @@ using VJ.Lobby.UI;
 namespace VJ.Networking
 {
     [RequireComponent(typeof(KcpTransport))]
-    public class CustomNetworkManager : NetworkRoomManager //NetworkManager
+    public class CustomNetworkManager : NetworkRoomManager
     {
         public static CustomNetworkManager instance;
         public int playerCount;
@@ -19,6 +19,10 @@ namespace VJ.Networking
         [Header("Local player related")]
         public bool isPlayerServer;
         public string playerName;
+
+        [Header("Match Start variables")]
+        public int timer = 0;
+        private int duration = 4;
 
         public override void Awake()
         {
@@ -84,12 +88,26 @@ namespace VJ.Networking
             return addr[addr.Length - 1].ToString();
         }
 
+        private IEnumerator CoMatchStart()
+        {
+            float time = 0f;
+            while(timer <= duration)
+            {
+                time += Time.deltaTime; // / duration;
+                timer = (int)time;
+                yield return null;
+            }
+            ServerChangeScene(GameplayScene);
+        }
+
         #region Room Callbacks
 
         public override void OnRoomServerPlayersReady()
         {
-            base.OnRoomServerPlayersReady();
             Debug.Log("All players are ready. Loading level...");
+            LobbyUIManager.instance.timerDisplay.gameObject.SetActive(true);
+            StartCoroutine(CoMatchStart());
+            //ServerChangeScene(GameplayScene);
         }
 
         #endregion
