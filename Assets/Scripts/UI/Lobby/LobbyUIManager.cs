@@ -46,7 +46,7 @@ namespace VJ.Lobby.UI
         private void OnGUI()
         {
             string t = customNetworkManager.timer.ToString();
-            timerDisplay.text = "Match begins in + " + t + "...";
+            timerDisplay.text = "Match begins in " + t + "...";
         }
 
         private void Update()
@@ -94,13 +94,13 @@ namespace VJ.Lobby.UI
         {
             if(!localPlayer.readyToBegin)
             {
-                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(true); //localPlayer.readyToBegin = true;
+                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(true);
                 button_ready.gameObject.SetActive(false);
                 button_notReady.gameObject.SetActive(true);
             }
             else
             {
-                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(false); //localPlayer.readyToBegin = false;
+                localPlayer.GetComponent<NetworkRoomPlayer>().CmdChangeReadyState(false);
                 button_ready.gameObject.SetActive(true);
                 button_notReady.gameObject.SetActive(false);
             }

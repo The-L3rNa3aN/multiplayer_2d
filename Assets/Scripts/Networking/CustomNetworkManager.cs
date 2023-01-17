@@ -93,7 +93,7 @@ namespace VJ.Networking
             float time = 0f;
             while(timer <= duration)
             {
-                time += Time.deltaTime; // / duration;
+                time += Time.deltaTime;
                 timer = (int)time;
                 yield return null;
             }
@@ -104,10 +104,8 @@ namespace VJ.Networking
 
         public override void OnRoomServerPlayersReady()
         {
-            Debug.Log("All players are ready. Loading level...");
             LobbyUIManager.instance.timerDisplay.gameObject.SetActive(true);
             StartCoroutine(CoMatchStart());
-            //ServerChangeScene(GameplayScene);
         }
 
         #endregion

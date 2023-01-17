@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using VJ.Networking;
+using VJ.UI.Game;
 
 namespace VJ.Client
 {
@@ -10,6 +11,7 @@ namespace VJ.Client
     public class Player : NetworkBehaviour
     {
         private Rigidbody2D rb;
+        private GameUIManager gameUI;
 
         public float speed;
         private Vector2 movementHor;
@@ -30,6 +32,7 @@ namespace VJ.Client
             }
 
             rb = GetComponent<Rigidbody2D>();
+            gameUI = FindObjectOfType<GameUIManager>();
         }
 
         private void Update()
@@ -39,15 +42,14 @@ namespace VJ.Client
             //Gravity code here.
             isGrounded = Physics2D.Raycast(transform.position, -transform.up, 0.6f, groundMask);
 
-            movementHor = new Vector2(Input.GetAxis("Horizontal"), 0f);
+            if(!gameUI.isPaused)
+                movementHor = new Vector2(Input.GetAxis("Horizontal"), 0f);
         }
 
         private void FixedUpdate()
         {
             if(isGrounded && gravity.y < 0f)
-            {
                 gravity.y = -2f;
-            }
 
             gravity.y += gConstant * Time.fixedDeltaTime;
             rb.velocity = movementHor * speed + gravity * Time.fixedDeltaTime;

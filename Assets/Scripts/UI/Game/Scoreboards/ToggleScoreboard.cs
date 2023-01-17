@@ -12,10 +12,17 @@ namespace VJ.UI.Game.Scoreboards
         public GameObject heading_score;
         public GameObject scoreboardItem;       //Prefab.
 
+        public GameUIManager gameUIManager;
+
+        private void Start()
+        {
+            gameUIManager.GetComponent<GameUIManager>();
+        }
+
         private void Update()
         {
             PlayerTag[] players = FindObjectsOfType<PlayerTag>();
-
+            
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 scoreboardPanel.SetActive(true);
@@ -27,7 +34,7 @@ namespace VJ.UI.Game.Scoreboards
                     item.InitializeItem(player);
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.Tab))
+            else //if (Input.GetKeyUp(KeyCode.Tab))
             {
                 scoreboardPanel.SetActive(false);
                 heading_name.SetActive(false);
