@@ -88,6 +88,7 @@ namespace VJ.Networking
             return addr[addr.Length - 1].ToString();
         }
 
+        //[Command]
         private IEnumerator CoMatchStart()
         {
             float time = 0f;

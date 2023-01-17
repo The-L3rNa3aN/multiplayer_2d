@@ -15,6 +15,8 @@ namespace VJ.Lobby.UI
         [Header("UI References")]
         public Button button_ready;
         public Button button_notReady;
+
+        [Header("Match start timer")]
         public Text timerDisplay;
 
         [Header("Player List")]

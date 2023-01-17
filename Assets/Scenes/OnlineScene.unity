@@ -268,7 +268,6 @@ GameObject:
   - component: {fileID: 493790005}
   - component: {fileID: 493790007}
   - component: {fileID: 493790006}
-  - component: {fileID: 493790008}
   m_Layer: 5
   m_Name: ScoreboardPanel
   m_TagString: Untagged
@@ -337,23 +336,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493790004}
   m_CullTransparentMesh: 1
---- !u!114 &493790008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493790004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec5e64588447c441b76b8930a29cb7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreboardPanel: {fileID: 489105567}
-  heading_name: {fileID: 1375222964}
-  heading_score: {fileID: 2084694095}
-  scoreboardItem: {fileID: 1474299282240522099, guid: c20db4ec5b850d646b9a5d0f92ccb812, type: 3}
-  gameUIManager: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,6 +1006,10 @@ MonoBehaviour:
   pausePanel: {fileID: 1031836545}
   isPaused: 0
   connInfo: {fileID: 1795811000}
+  scoreboardPanel: {fileID: 489105567}
+  heading_name: {fileID: 1375222964}
+  heading_score: {fileID: 2084694095}
+  scoreboardItem: {fileID: 1474299282240522099, guid: c20db4ec5b850d646b9a5d0f92ccb812, type: 3}
 --- !u!1 &1365897147
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VJ.Client;
 
-namespace VJ.UI.Game.Scoreboards
+namespace VJ.UI.Game
 {
     public class ScoreboardItem : MonoBehaviour
     {

@@ -68,6 +68,8 @@ namespace VJ.UI.MainMenu
             }
             else
                 StartCoroutine(DislayEmptyWarning());
+
+            CustomNetworkManager.instance.isPlayerServer = true;
         }
 
         public void Back()
