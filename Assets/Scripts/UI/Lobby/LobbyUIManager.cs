@@ -67,13 +67,13 @@ namespace VJ.Lobby.UI
             if (itemCount > playerCount)
                 itemCount = playerCount;
 
-            for (int i = itemCount; i < playerCount; i++)
+            for (int i = itemCount; i < playerCount;)
             {
                 Transform newItem = emptyListPool.GetChild(0);  //The first object in the pool.
                 newItem.SetParent(playerListContainer);
                 newItem.gameObject.SetActive(true);
                 newItem.GetComponent<PlayerListItem>().SetPlayerName(playerList[i]);        //This doesn't work for players who are already in the server.
-                //i++;
+                i++;
             }
         }
 

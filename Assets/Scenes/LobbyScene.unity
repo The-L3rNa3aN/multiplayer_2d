@@ -5477,6 +5477,7 @@ MonoBehaviour:
   emptyListPool: {fileID: 2008271445}
   itemCount: 0
   playerCount: 0
+  listitemPrefab: {fileID: 4588135213041902186, guid: 3701304ed3048ee44a165871fc32f1c6, type: 3}
   chatInputField: {fileID: 581028118}
   chatMessage: {fileID: 9184544780224486453, guid: 339a33f4dc747004c82e02491a11b405, type: 3}
   chatContainer: {fileID: 591082003}
